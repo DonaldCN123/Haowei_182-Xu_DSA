@@ -5,10 +5,7 @@ public class Grades {
    
    private Integer [] grades = null;
 
-   /**
-    * A constructor for building IntArrays.
-    * @param grades the plain Java integer array with numbers to add.
-    */
+   
    public Grades(Integer [] grades) {
       this.grades = new Integer [grades.length];
       for (int counter = 0; counter < grades.length; counter++) {
@@ -29,10 +26,7 @@ public class Grades {
       
    }
 
-   /**
-    * Returns the plain Java int [] array for investigation.
-    * @return The int array.
-    */
+
    public Integer [] getArray() {
       return grades;
    }
