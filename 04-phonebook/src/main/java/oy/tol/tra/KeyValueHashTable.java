@@ -69,13 +69,13 @@ public class KeyValueHashTable<K extends Comparable<K>, V> implements Dictionary
         
         int i;
         int steps = 1;
-        for( i = (key.hashCode() & 0x7fffffff)% Integer.MAX_VALUE % values.length; values[i] != null; i = (i +1 ) % values.length ,steps++){
+        for( i = Math.abs(key.hashCode()) % values.length; values[i] != null; i = (i +1 ) % values.length ,steps++){
             if(values[i].getKey().equals(key)){ 
                 values[i].setValue(value);
                 return true;
             }
         }
-        if(i != (key.hashCode() & 0x7fffffff)% Integer.MAX_VALUE % values.length) collisionCount++;
+        if(i != Math.abs(key.hashCode()) % values.length) collisionCount++;
         if(steps > maxProbingSteps) maxProbingSteps = steps;
         values[i] = new Pair<K,V>(key, value);
         count++;
@@ -89,7 +89,7 @@ public class KeyValueHashTable<K extends Comparable<K>, V> implements Dictionary
     public V find(K key) throws IllegalArgumentException {
         if (null == key) throw new IllegalArgumentException("Key to find cannot be null");
         int i;
-        for( i = (key.hashCode() & 0x7fffffff)% Integer.MAX_VALUE% values.length; values[i] != null; i = (i +1 ) % values.length){
+        for( i = Math.abs(key.hashCode())% values.length; values[i] != null; i = (i +1 ) % values.length){
             if(values[i].getKey().equals(key)){ 
                 return values[i].getValue();
             }
